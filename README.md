@@ -8,7 +8,7 @@ CodeMap is a lightweight dependency explorer for understanding how source files 
 
 ## What works in the current preview
 
-- Open a project folder in your browser, or load the included demo graph.
+- Open a project folder in your browser, analyze a public GitHub repository by URL, or load the included demo graph.
 - Detect common relative imports and `require` calls in JavaScript/TypeScript, plus basic Python imports.
 - Explore a dependency graph and searchable file list.
 - Inspect incoming and outgoing relationships for a selected file.
@@ -21,7 +21,7 @@ The first preview is a static browser application. It reads files selected by yo
 
 ### GitHub Pages
 
-Visit **https://ericsnet.github.io/CodeMap/**. Pages is intended as a quick, no-install preview. Use **Load demo** to try the interface without selecting a project, or select a project folder from your device.
+Visit **https://ericsnet.github.io/CodeMap/**. Pages is intended as a quick, no-install preview. Use **Load demo**, select a project folder, or paste a public GitHub repository URL such as `https://github.com/owner/repo` into the GitHub field and choose **Analyze GitHub**. A URL containing `/tree/branch-name` can target a specific branch.
 
 A GitHub Pages website cannot silently read arbitrary folders on your computer. You must explicitly select the folder/files through the browser file picker.
 
@@ -31,10 +31,13 @@ A GitHub Pages website cannot silently read arbitrary folders on your computer. 
 2. Open `index.html` in a modern browser.
 3. Choose **Load demo** or select a project folder.
 
-No package manager, build step, server, or account is required for this preview.
+No package manager, build step, server, or account is required for this preview. The GitHub repository feature reads public repository metadata from the GitHub API and source files from `raw.githubusercontent.com`; it does not require a GitHub token.
 
 ## Current limitations
 
+- GitHub analysis currently supports public repositories only. Private repositories require authentication and are not supported by this preview.
+- GitHub API rate limits, network restrictions, or browser/network CORS policies can prevent repository downloads. If that happens, download/clone the repository and use the local folder picker instead.
+- GitHub analysis skips common generated/dependency directories, files over 500 KB, and caps the download to 400 candidate files and about 8 MB per run.
 - Dependency detection is based on source-text patterns, not a complete language parser.
 - Relative paths and common file extensions are supported; aliases, package resolution, dynamic imports, generated code, and many Python package layouts may not be resolved.
 - Cycle detection is approximate and should be treated as a hint, not a formal architecture audit.
