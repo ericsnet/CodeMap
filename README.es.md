@@ -8,7 +8,7 @@ CodeMap es un explorador de dependencias para entender cómo se relacionan los a
 
 ## Qué funciona en la vista previa actual
 
-- Abrir una carpeta de proyecto desde el navegador o cargar el grafo de demostración.
+- Abrir una carpeta de proyecto desde el navegador, analizar un repositorio público de GitHub mediante su URL o cargar el grafo de demostración.
 - Detectar imports relativos habituales y llamadas a `require` en JavaScript/TypeScript, además de imports básicos de Python.
 - Explorar un grafo de dependencias y una lista de archivos con búsqueda.
 - Consultar qué archivos importa un archivo seleccionado y cuáles dependen de él.
@@ -21,7 +21,7 @@ La primera versión es una aplicación estática que funciona en el navegador. L
 
 ### GitHub Pages
 
-Entra en **https://ericsnet.github.io/CodeMap/**. Pages sirve como vista previa rápida, sin instalación. Pulsa **Cargar demo** para probar la interfaz sin seleccionar un proyecto o selecciona una carpeta de tu dispositivo.
+Entra en **https://ericsnet.github.io/CodeMap/**. Pages sirve como vista previa rápida, sin instalación. Puedes pulsar **Cargar demo**, seleccionar una carpeta o pegar una URL de un repositorio público (por ejemplo, `https://github.com/owner/repo`) en el campo de GitHub y pulsar **Analizar GitHub**. También puedes indicar una rama con una URL como `https://github.com/owner/repo/tree/nombre-rama`.
 
 Una web alojada en GitHub Pages no puede leer silenciosamente cualquier carpeta de tu ordenador. Tienes que seleccionar explícitamente la carpeta o los archivos mediante el selector del navegador.
 
@@ -31,10 +31,13 @@ Una web alojada en GitHub Pages no puede leer silenciosamente cualquier carpeta 
 2. Abre `index.html` con un navegador moderno.
 3. Pulsa **Cargar demo** o selecciona una carpeta de proyecto.
 
-Esta vista previa no necesita gestor de paquetes, compilación, servidor ni cuenta.
+Esta vista previa no necesita gestor de paquetes, compilación, servidor ni cuenta. La función de GitHub consulta los metadatos mediante la API de GitHub y descarga los archivos desde `raw.githubusercontent.com`; no necesita un token de acceso.
 
 ## Limitaciones actuales
 
+- El análisis de GitHub solo admite repositorios públicos. Los privados requieren autenticación y no son compatibles con esta vista previa.
+- Los límites de la API de GitHub, restricciones de red o políticas CORS del navegador/red pueden impedir las descargas. Si ocurre, descarga o clona el repositorio y usa el selector de carpetas local.
+- Se omiten directorios comunes de dependencias y archivos generados, archivos de más de 500 KB, y el análisis está limitado a 400 archivos candidatos y unos 8 MB por ejecución.
 - La detección de dependencias se basa en patrones de texto, no en un parser completo del lenguaje.
 - Se admiten rutas relativas y extensiones habituales; puede que no se resuelvan alias, paquetes, imports dinámicos, código generado ni muchas estructuras de paquetes Python.
 - La detección de ciclos es aproximada: debe considerarse una pista, no una auditoría formal de arquitectura.
