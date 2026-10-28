@@ -2,36 +2,52 @@
 
 **[English](./README.md) · [Español](./README.es.md)**
 
-CodeMap is a project in its planning stage that aims to help developers understand a software repository's architecture by showing how files and modules relate to one another.
+CodeMap is a lightweight dependency explorer for understanding how source files in a project relate to one another.
 
-## Planned features
+**[Open the GitHub Pages preview](https://ericsnet.github.io/CodeMap/)**
 
-- **Dependency graph:** visualize relationships between files and modules.
-- **Project structure explorer:** browse directories and components in one view.
-- **Entry-point discovery:** identify likely application entry points.
-- **Coupling analysis:** highlight modules with many relationships or difficult dependency patterns.
-- **Architecture report:** generate a readable overview of a project's structure and dependencies.
+## What works in the current preview
 
-These are planned goals, not implemented features.
+- Open a project folder in your browser, or load the included demo graph.
+- Detect common relative imports and `require` calls in JavaScript/TypeScript, plus basic Python imports.
+- Explore a dependency graph and searchable file list.
+- Inspect incoming and outgoing relationships for a selected file.
+- See simple isolated-file counts and approximate dependency cycles.
+- Export the detected graph and file relationships to JSON.
 
-## Planned technology
+The first preview is a static browser application. It reads files selected by you in the browser and does not upload them to a CodeMap server. It is not yet a full parser or a replacement for language-aware analysis.
 
-- **Rust** for code analysis and dependency extraction.
-- **TypeScript** for the visualization interface.
+## GitHub Pages and local use
 
-The implementation choices may change as the project evolves.
+### GitHub Pages
 
-## Status
+Visit **https://ericsnet.github.io/CodeMap/**. Pages is intended as a quick, no-install preview. Use **Load demo** to try the interface without selecting a project, or select a project folder from your device.
 
-**Early planning.** This repository currently contains documentation and a license only. No executable code is included yet.
+A GitHub Pages website cannot silently read arbitrary folders on your computer. You must explicitly select the folder/files through the browser file picker.
 
-## Initial roadmap
+### Run locally
 
-1. Choose the first supported languages and project formats.
-2. Design a data model for files, modules, and dependencies.
-3. Build an initial repository-structure analyzer.
-4. Display dependencies in a navigable interface.
-5. Add coupling metrics and architecture reports.
+1. Download or clone this repository.
+2. Open `index.html` in a modern browser.
+3. Choose **Load demo** or select a project folder.
+
+No package manager, build step, server, or account is required for this preview.
+
+## Current limitations
+
+- Dependency detection is based on source-text patterns, not a complete language parser.
+- Relative paths and common file extensions are supported; aliases, package resolution, dynamic imports, generated code, and many Python package layouts may not be resolved.
+- Cycle detection is approximate and should be treated as a hint, not a formal architecture audit.
+- The graph draws at most 100 files at once for readability; the file list and JSON export include all detected files.
+- The Rust analysis engine and a dedicated TypeScript application architecture are future development goals, not yet integrated into this preview.
+
+## Roadmap
+
+1. Improve import resolution and add automated tests.
+2. Build a Rust analysis core with a stable graph/report format.
+3. Develop a richer TypeScript interface for large repositories.
+4. Add entry-point discovery, coupling metrics, and architecture reports.
+5. Expand language support and validate cycle detection.
 
 ## License
 
