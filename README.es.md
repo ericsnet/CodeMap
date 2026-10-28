@@ -9,13 +9,13 @@ CodeMap es un explorador de dependencias para entender cómo se relacionan los a
 ## Qué funciona en la vista previa actual
 
 - Abrir una carpeta de proyecto desde el navegador, analizar un repositorio público de GitHub mediante su URL o cargar el grafo de demostración.
-- Detectar imports relativos habituales y llamadas a `require` en JavaScript/TypeScript, además de imports básicos de Python.
+- Detectar relaciones de código habituales en JavaScript/TypeScript, Python, HTML, CSS y preprocesadores, Rust, C/C++, C#, Java, Kotlin, Go, PHP, Ruby, Swift, Dart, Vue/Svelte y algunos archivos de proyecto/configuración.
 - Explorar un grafo de dependencias y una lista de archivos con búsqueda.
 - Consultar qué archivos importa un archivo seleccionado y cuáles dependen de él.
 - Mostrar un recuento sencillo de archivos aislados y ciclos aproximados.
 - Exportar a JSON el grafo y las relaciones detectadas.
 
-La primera versión es una aplicación estática que funciona en el navegador. Lee los archivos que seleccionas y no los sube a un servidor de CodeMap. Todavía no es un analizador completo ni sustituye al análisis sintáctico específico de cada lenguaje.
+La vista previa es una aplicación estática que funciona en el navegador. Lee los archivos que seleccionas y no los sube a un servidor de CodeMap. La detección multilenguaje usa patrones de texto y heurísticas de rutas: no es un parser completo ni sustituye al análisis específico de cada lenguaje.
 
 ## GitHub Pages y uso local
 
@@ -38,7 +38,7 @@ Esta vista previa no necesita gestor de paquetes, compilación, servidor ni cuen
 - El análisis de GitHub solo admite repositorios públicos. Los privados requieren autenticación y no son compatibles con esta vista previa.
 - Los límites de la API de GitHub, restricciones de red o políticas CORS del navegador/red pueden impedir las descargas. Si ocurre, descarga o clona el repositorio y usa el selector de carpetas local.
 - Se omiten directorios comunes de dependencias y archivos generados, archivos de más de 500 KB, y el análisis está limitado a 400 archivos candidatos y unos 8 MB por ejecución.
-- La detección de dependencias se basa en patrones de texto, no en un parser completo del lenguaje.
+- La compatibilidad depende del estilo de dependencias: se intentan detectar enlaces locales en HTML, `@import`/`url()` en CSS, `mod` en Rust, includes entre comillas en C/C++ y patrones habituales de importación en otros lenguajes. La resolución de namespaces, macros, reglas del sistema de compilación, alias, código generado y dependencias dinámicas puede fallar.
 - Se admiten rutas relativas y extensiones habituales; puede que no se resuelvan alias, paquetes, imports dinámicos, código generado ni muchas estructuras de paquetes Python.
 - La detección de ciclos es aproximada: debe considerarse una pista, no una auditoría formal de arquitectura.
 - El grafo muestra como máximo 100 archivos a la vez para mantener la legibilidad; la lista y la exportación JSON incluyen todos los archivos detectados.
