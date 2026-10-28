@@ -9,13 +9,13 @@ CodeMap is a lightweight dependency explorer for understanding how source files 
 ## What works in the current preview
 
 - Open a project folder in your browser, analyze a public GitHub repository by URL, or load the included demo graph.
-- Detect common relative imports and `require` calls in JavaScript/TypeScript, plus basic Python imports.
+- Detect common source relationships across JavaScript/TypeScript, Python, HTML, CSS preprocessors, Rust, C/C++, C#, Java, Kotlin, Go, PHP, Ruby, Swift, Dart, Vue/Svelte, and selected project/configuration files.
 - Explore a dependency graph and searchable file list.
 - Inspect incoming and outgoing relationships for a selected file.
 - See simple isolated-file counts and approximate dependency cycles.
 - Export the detected graph and file relationships to JSON.
 
-The first preview is a static browser application. It reads files selected by you in the browser and does not upload them to a CodeMap server. It is not yet a full parser or a replacement for language-aware analysis.
+The preview is a static browser application. It reads files selected by you in the browser and does not upload them to a CodeMap server. Multi-language dependency detection uses text patterns and path heuristics; it is not a full parser or a replacement for language-aware analysis.
 
 ## GitHub Pages and local use
 
@@ -38,7 +38,7 @@ No package manager, build step, server, or account is required for this preview.
 - GitHub analysis currently supports public repositories only. Private repositories require authentication and are not supported by this preview.
 - GitHub API rate limits, network restrictions, or browser/network CORS policies can prevent repository downloads. If that happens, download/clone the repository and use the local folder picker instead.
 - GitHub analysis skips common generated/dependency directories, files over 500 KB, and caps the download to 400 candidate files and about 8 MB per run.
-- Dependency detection is based on source-text patterns, not a complete language parser.
+- Language support varies by dependency style: local HTML asset links, CSS `@import`/`url()`, Rust `mod`, quoted C/C++ includes, and common import/include patterns in several other languages are heuristically detected. Namespace resolution, macros, build-system rules, aliases, generated code, and dynamic dependencies may be missed.
 - Relative paths and common file extensions are supported; aliases, package resolution, dynamic imports, generated code, and many Python package layouts may not be resolved.
 - Cycle detection is approximate and should be treated as a hint, not a formal architecture audit.
 - The graph draws at most 100 files at once for readability; the file list and JSON export include all detected files.
