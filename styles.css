@@ -3,3 +3,5 @@
 
 /* Controles y lienzo del grafo */
 .graph-actions{gap:5px}.graph-actions button{padding:6px 9px;font-size:12px}.graph-actions #zoomResetBtn{min-width:52px}#graph{touch-action:none;max-width:none;width:auto;height:auto;min-height:0}section.panel:has(>#graph){min-width:0;overflow:auto}.workspace>section.panel{min-width:0}
+
+.filter-toggle{display:flex;align-items:center;gap:8px;margin:0 0 12px;color:var(--muted);font-size:12px;cursor:pointer}.filter-toggle input{accent-color:var(--accent);width:15px;height:15px;margin:0}
